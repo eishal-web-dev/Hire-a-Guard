@@ -17,11 +17,6 @@ export default function Home() {
   return (
     <main className="site-shell">
       {notice && <div className="toast">✓ {notice}</div>}
-      <nav>
-        <button className="brand" onClick={() => setScreen("home")} aria-label="HireGuard home"><span className="shield">◆</span><strong>HireGuard</strong></button>
-        <div className="navlinks"><button onClick={() => setScreen("guards")}>Find guards</button><button onClick={() => toast("Agency dashboard preview opened")}>For agencies</button><button onClick={() => toast("Safety centre opened")}>Safety</button></div>
-        <div className="navactions"><button className="ghost" onClick={() => toast("Demo login successful")}>Log in</button><button className="primary small" onClick={() => setScreen("request")}>Hire a guard</button></div>
-      </nav>
 
       {screen === "home" && <>
         <section className="hero">
@@ -70,7 +65,6 @@ export default function Home() {
 
       {screen === "guards" && <section className="appscreen"><button className="back" onClick={() => setScreen("home")}>← Back to home</button><div className="resultshead"><div><span className="kicker">LIVE MATCHES</span><h2>Verified guards near you</h2><p>Available for your selected location and shift.</p></div><button className="secondary" onClick={() => setScreen("request")}>Edit request</button></div><div className="guardlist">{guards.map((g) => <article className={selected === g.name ? "guardcard selected" : "guardcard"} key={g.name}><div className="avatar">{g.initials}<i>✓</i></div><div className="guardinfo"><div className="titleline"><h3>{g.name}</h3><span className={g.status === "Available" ? "available" : "busy"}>● {g.status}</span></div><p>{g.role}</p><div className="meta"><span>★ {g.rating}</span><span>{g.jobs} completed jobs</span><span>⌖ {g.distance} away</span></div><div className="chips">{g.skills.map(s => <span key={s}>{s}</span>)}</div></div><button className="primary hire" onClick={() => { setSelected(g.name); toast(`${g.name} selected — agency notified`); }}>Select guard</button></article>)}</div></section>}
 
-      <footer><div className="brand"><span className="shield">◆</span><strong>HireGuard</strong></div><p>A product demonstration by Ashes Stack.</p><span>Security made simpler.</span></footer>
     </main>
   );
 }
